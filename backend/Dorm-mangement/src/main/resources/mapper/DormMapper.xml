@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.DormMapper">
+    <insert id="insert">
+        insert into dormitory(dorm_number, floor_name, descrpition, create_time, update_time, create_user, update_user)
+        values (#{dormNumber}, #{floorName}, #{descrpition}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+    <update id="updateById">
+        update dormitory
+        <set>
+            <if test="dormNumber !=null and dormNumber !=''">
+                dorm_number=
+                #{dormNumber},
+            </if>
+            <if test="floorName !=null and floorName !=''">
+                floor_name=
+                #{floorName},
+            </if>
+            <if test="descrpition !=null and descrpition !=''">
+                descrpition=
+                #{descrpition},
+            </if>
+            <if test="updateTime !=null">
+                update_time =
+                #{updateTime},
+            </if>
+            <if test="updateUser !=null">
+                update_user =
+                #{updateUser},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="pageQuery" resultType="com.example.pojo.entity.Dorm">
+        select *from dormitory
+        <where>
+            <if test="dormNumber !=null">
+                and dorm_number like concat('%',
+                #{dormNumber},
+                '%'
+                )
+            </if>
+            <if test="floorName !=null">
+                and floor_name like concat('%',
+                #{floorName},
+                '%'
+                )
+            </if>
+        </where>
+    </select>
+</mapper>

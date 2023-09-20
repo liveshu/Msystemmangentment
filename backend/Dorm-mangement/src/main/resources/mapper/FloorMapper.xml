@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.FloorMapper">
+
+    <insert id="insert">
+        insert into floor(floor_name, number, create_time, update_time, create_user, update_user)
+        VALUES (#{floorName}, #{number}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+    <update id="update">
+        update floor
+        <set>
+            <if test="floorName !=null and floorName !=''">
+                floor_name=
+                #{floorName},
+            </if>
+            <if test="number !=null and number !=''">
+                number=
+                #{number},
+            </if>
+            <if test="updateTime !=null">
+                update_time =
+                #{updateTime},
+            </if>
+            <if test="updateUser !=null">
+                update_user =
+                #{updateUser},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

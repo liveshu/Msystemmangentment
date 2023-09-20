@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.StudentMapper">
+    <insert id="insert">
+        insert into student(dorm_number, student, create_time, update_time, create_user, update_user)
+        values (#{dormNumber}, #{student}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+    <update id="updateById">
+        update student
+        <set>
+            <if test="dormNumber !=null and dormNumber !=''">
+                dorm_number=
+                #{dormNumber},
+            </if>
+            <if test="student !=null and student !=''">
+                student=
+                #{student},
+            </if>
+            <if test="updateTime !=null">
+                update_time =
+                #{updateTime},
+            </if>
+            <if test="updateUser !=null">
+                update_user =
+                #{updateUser},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+
+    <select id="pageQuery" resultType="com.example.pojo.entity.Student">
+        select *from student
+        <where>
+            <if test="dormNumber !=null">
+                and dorm_number like concat('%',
+                #{dormNumber},
+                '%'
+                )
+            </if>
+            <if test="student !=null">
+                and student like concat('%',
+                #{student},
+                '%'
+                )
+            </if>
+        </where>
+    </select>
+</mapper>

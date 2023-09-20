@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+  main:
+    allow-circular-references: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dormitory management
+    username: root
+    password: 1234
+
+
+
+mybatis:
+
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.pojo.entity
+  configuration:
+
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      example:
+        mapper: debug
+        service: info
+        controller: info
+
+example:
+  jwt:
+
+    admin-secret-key: dormAdminSystem
+
+    admin-ttl: 7200000
+
+    admin-token-name: token
+
